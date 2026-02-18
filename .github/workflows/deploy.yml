@@ -27,7 +27,7 @@ permissions:
 jobs:
     deploy:
         name: Deploy
-        runs-on: mbp-13
+        runs-on: mbp-13-nixos
         steps:
             - name: unlock keychain
               run: security unlock-keychain -p ${{ secrets.KEYCHAIN_PASSWORD }} login.keychain
