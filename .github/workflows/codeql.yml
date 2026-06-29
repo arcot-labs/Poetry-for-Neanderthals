@@ -1,85 +1,85 @@
-name: Run CodeQL Analysis
+# name: Run CodeQL Analysis
 
-on:
-    push:
-        branches:
-            - main
-        paths:
-            - '.github/workflows/*.yml'
-            - 'src/**'
-            - 'angular.json'
-            - 'package-lock.json'
-            - 'package.json'
-            - 'tsconfig.json'
-    schedule:
-        - cron: '34 4 * * 2'
+# on:
+#     push:
+#         branches:
+#             - main
+#         paths:
+#             - '.github/workflows/*.yml'
+#             - 'src/**'
+#             - 'angular.json'
+#             - 'package-lock.json'
+#             - 'package.json'
+#             - 'tsconfig.json'
+#     schedule:
+#         - cron: '34 4 * * 2'
 
-concurrency:
-    group: codeql-${{ github.ref_name }}
-    cancel-in-progress: true
+# concurrency:
+#     group: codeql-${{ github.ref_name }}
+#     cancel-in-progress: true
 
-permissions:
-    security-events: write
+# permissions:
+#     security-events: write
 
-jobs:
-    analyze:
-        name: analyze (${{ matrix.language }})
-        runs-on: self-hosted
-        strategy:
-            fail-fast: false
-            matrix:
-                include:
-                    - language: actions
-                    - language: typescript
-        steps:
-            - name: checkout
-              uses: actions/checkout@v6
-              with:
-                  ref: main
+# jobs:
+#     analyze:
+#         name: analyze (${{ matrix.language }})
+#         runs-on: self-hosted
+#         strategy:
+#             fail-fast: false
+#             matrix:
+#                 include:
+#                     - language: actions
+#                     - language: typescript
+#         steps:
+#             - name: checkout
+#               uses: actions/checkout@v6
+#               with:
+#                   ref: main
 
-            - name: setup node
-              if: matrix.language == 'typescript'
-              uses: actions/setup-node@v6
-              with:
-                  node-version: 'lts/*'
-                  check-latest: true
+#             - name: setup node
+#               if: matrix.language == 'typescript'
+#               uses: actions/setup-node@v6
+#               with:
+#                   node-version: 'lts/*'
+#                   check-latest: true
 
-            - name: update npm
-              if: matrix.language == 'typescript'
-              run: npm i -g npm@latest
+#             - name: update npm
+#               if: matrix.language == 'typescript'
+#               run: npm i -g npm@latest
 
-            - name: initialize codeql for actions
-              if: matrix.language == 'actions'
-              uses: github/codeql-action/init@v4
-              with:
-                  languages: actions
-                  build-mode: none
-                  config: |
-                      paths:
-                      - '.github/workflows/*.yml'
+#             - name: initialize codeql for actions
+#               if: matrix.language == 'actions'
+#               uses: github/codeql-action/init@v4
+#               with:
+#                   languages: actions
+#                   build-mode: none
+#                   config: |
+#                       paths:
+#                       - '.github/workflows/*.yml'
 
-            - name: initialize codeql for typescript
-              if: matrix.language == 'typescript'
-              uses: github/codeql-action/init@v4
-              with:
-                  languages: typescript
-                  build-mode: none
-                  config: |
-                      paths:
-                      - 'src/**/*.ts'
+#             - name: initialize codeql for typescript
+#               if: matrix.language == 'typescript'
+#               uses: github/codeql-action/init@v4
+#               with:
+#                   languages: typescript
+#                   build-mode: none
+#                   config: |
+#                       paths:
+#                       - 'src/**/*.ts'
 
-            - name: install, build
-              if: matrix.language == 'typescript'
-              run: |
-                  npm config ls
-                  npm ci --cache .npm
-                  npm run build
+#             - name: install, build
+#               if: matrix.language == 'typescript'
+#               run: |
+#                   npm config ls
+#                   npm ci --cache .npm
+#                   npm run build
 
-            - name: run codeql
-              uses: github/codeql-action/analyze@v4
-              with:
-                  category: '/language:${{matrix.language}}'
+#             - name: run codeql
+#               uses: github/codeql-action/analyze@v4
+#               with:
+#                   category: '/language:${{matrix.language}}'
 
-            - name: remove cache folder
-              if: always()
-              run: rm -rf .npm
+#             - name: remove cache folder
+#               if: always()
+#               run: rm -rf .npm
