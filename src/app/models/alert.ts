@@ -5,5 +5,5 @@ export interface Alert {
     type: AlertTypeEnum
     message: string
     subtext: string[]
-    timeout?: NodeJS.Timeout
+    timeout?: ReturnType<typeof setTimeout>
 }

@@ -1,4 +1,11 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core'
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    inject,
+    OnInit,
+    Output,
+} from '@angular/core'
 import { GamePointsEnum } from '@enums'
 import { Card, gamePointsCategoryMap } from '@models'
 import { AlertService, GameService } from '@services'
@@ -8,6 +15,7 @@ import { LoggerComponent } from '../logger.component'
 @Component({
     selector: 'app-game-turn-summary',
     templateUrl: './game-turn-summary.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './game-turn-summary.component.css',
 })
 export class GameTurnSummaryComponent

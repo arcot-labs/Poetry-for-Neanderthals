@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
     inject,
     OnInit,
@@ -23,6 +24,7 @@ import { Modal } from 'bootstrap'
         GameTurnSummaryComponent,
         GameSummaryComponent,
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     templateUrl: './game.component.html',
 })
 export class GameComponent

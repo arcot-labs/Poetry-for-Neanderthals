@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common'
-import { Component, OnDestroy, inject } from '@angular/core'
+import {
+    ChangeDetectionStrategy,
+    Component,
+    OnDestroy,
+    inject,
+} from '@angular/core'
 import { AlertTypeEnum } from '@enums'
 import { Alert } from '@models'
 import { AlertService } from '@services'
@@ -9,6 +14,7 @@ import { Subscription } from 'rxjs'
     selector: 'app-alert',
     imports: [CommonModule],
     templateUrl: './alert.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './alert.component.css',
 })
 export class AlertComponent implements OnDestroy {

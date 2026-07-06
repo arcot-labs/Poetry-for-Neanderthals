@@ -39,6 +39,7 @@ module.exports = defineConfig(
                     style: 'kebab-case',
                 },
             ],
+            '@angular-eslint/prefer-on-push-component-change-detection': 'off',
             '@typescript-eslint/no-unused-vars': [
                 'error',
                 {

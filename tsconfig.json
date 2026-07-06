@@ -14,17 +14,24 @@
         "importHelpers": true,
         "target": "ES2022",
         "module": "preserve",
-        "baseUrl": "src",
         "paths": {
-            "@components": ["app/components/index.ts"],
-            "@enums": ["app/enums/index.ts"],
-            "@models": ["app/models/index.ts"],
-            "@services": ["app/services/index.ts"],
-            "@utilities": ["app/utilities/index.ts"]
+            "app/*": ["./src/app/*"],
+            "environment": ["./src/environment.ts"],
+            "@components": ["./src/app/components/index.ts"],
+            "@enums": ["./src/app/enums/index.ts"],
+            "@models": ["./src/app/models/index.ts"],
+            "@services": ["./src/app/services/index.ts"],
+            "@utilities": ["./src/app/utilities/index.ts"]
         }
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,
+        "extendedDiagnostics": {
+            "checks": {
+                "nullishCoalescingNotNullable": "suppress",
+                "optionalChainNotNullable": "suppress"
+            }
+        },
         "strictInjectionParameters": true,
         "strictInputAccessModifiers": true,
         "typeCheckHostBindings": true,

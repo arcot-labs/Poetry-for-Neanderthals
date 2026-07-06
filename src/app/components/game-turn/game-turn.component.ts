@@ -1,4 +1,5 @@
 import {
+    ChangeDetectionStrategy,
     Component,
     EventEmitter,
     inject,
@@ -13,6 +14,7 @@ import { LoggerComponent } from '../logger.component'
 
 @Component({
     selector: 'app-game-turn',
+    changeDetection: ChangeDetectionStrategy.Eager,
     templateUrl: './game-turn.component.html',
 })
 export class GameTurnComponent
@@ -22,7 +24,7 @@ export class GameTurnComponent
     @Output() turnDone = new EventEmitter<void>()
 
     private readonly gameSvc = inject(GameService)
-    private timer: NodeJS.Timeout | null = null
+    private timer: ReturnType<typeof setInterval> | null = null
 
     introScreen = true
     resumeScreen = false

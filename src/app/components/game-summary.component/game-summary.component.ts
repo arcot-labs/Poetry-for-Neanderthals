@@ -1,8 +1,15 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core'
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    inject,
+    Output,
+} from '@angular/core'
 import { GameService } from '@services'
 
 @Component({
     selector: 'app-game-summary',
+    changeDetection: ChangeDetectionStrategy.Eager,
     templateUrl: './game-summary.component.html',
 })
 export class GameSummaryComponent {

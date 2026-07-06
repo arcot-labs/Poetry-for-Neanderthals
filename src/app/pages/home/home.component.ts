@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
     ElementRef,
     inject,
@@ -20,6 +21,7 @@ import { Modal } from 'bootstrap'
 
 @Component({
     imports: [ReactiveFormsModule],
+    changeDetection: ChangeDetectionStrategy.Eager,
     templateUrl: './home.component.html',
 })
 export class HomeComponent
@@ -114,8 +116,7 @@ export class HomeComponent
         if (!useCustomSeed) return null
 
         const customSeed: number | null = control.get('customSeed')?.value as
-            | number
-            | null
+            number | null
         if (customSeed === null) return { customSeedRequired: true }
         if (customSeed < 0 || customSeed > 999999)
             return { customSeedOutOfRange: true }
