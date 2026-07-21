@@ -27,7 +27,7 @@ permissions:
 jobs:
     deploy:
         name: Deploy
-        runs-on: mbp-13-ubuntu
+        runs-on: dell-ubuntu
         steps:
             - name: checkout
               uses: actions/checkout@v7
